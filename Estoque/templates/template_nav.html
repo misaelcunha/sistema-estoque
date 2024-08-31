@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Estoque</title>
+  <link rel="shortcut icon" href="{{ url_for('static', filename='img/esa-fav.png') }}">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" 
+    rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+  <link rel="stylesheet" href="{{ url_for('static', filename='./css/normalize.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='./css/navbar.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='./css/estoque.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='./css/footer.css') }}">
+  <script src="{{ url_for('static', filename='./js/index.js') }}"></script>
+</head>
+<body>
+  <!-- Navegação -->
+  <nav class="site-nav">
+    <div>
+      <a href="{{ url_for('index')}}"><img src="{{ url_for('static', filename='./img/esa-logo.png') }}" alt="ESA" class="header-logo"></a>
+    </div>
+    <div>
+      <ul class="menu-list">
+        <li class="menu-item">
+          <a href="{{ url_for('mostra_estoque')}}">
+            <div class="menu-card {% if caminho_atual == url_for('mostra_estoque') %} active {% endif %}">
+              Estoque
+            </div>
+          </a>
+        </li>
+        <li class="menu-item ">
+          <a href="{{ url_for('entrada_saida')}}">
+            <div class="menu-card {% if caminho_atual == url_for('entrada_saida') %} active {% endif %}">
+              Entradas
+            </div>
+          </a>
+        </li>
+        <li class="menu-item">
+          <a href="{{ url_for('mostra_historico')}}">
+            <div class="menu-card {% if caminho_atual == url_for('mostra_historico') %} active {% endif %}">
+              Histórico
+            </div>
+          </a>
+        </li>
+        <li class="menu-item">
+          <a href="{{ url_for('logout') }}">
+            <div class="menu-card">
+              Sair
+            </div>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+  <!-- Imagem Cabeçalho -->
+  <div>
+    <img src="{{ url_for('static', filename='./img/img-header.png') }}" alt="Imagem Header" class="header-img">
+  </div>
+
+  <!-- Mensagens Flash -->
+  {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    {% for message in messages %}
+    <div id="alerta" class="alert alert-success alert-dismissible fade show" role="alert">
+      <img src="{{ url_for('static', filename='./img/check.svg') }}" alt="Check"> {{ message }}
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    {% endfor %}
+    {% endif %}
+  {% endwith %}
+
+  <!-- Conteúdo Principal -->
+  {% block conteudo %} {% endblock %}
+
+  <!-- Rodapé -->
+  <footer class="footer">
+    <img src="{{ url_for('static', filename='./img/footer.png') }}" alt="ESA" class="footer-logo">
+  </footer>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" 
+  integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+</body>
+</html>

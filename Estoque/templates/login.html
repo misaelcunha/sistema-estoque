@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=], initial-scale=1.0">
+    <title>Estoque</title>
+    <link rel="shortcut icon" href="../static/img/esa-fav.png">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" 
+    rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ url_for('static', filename='./css/normalize.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='./css/login.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='./css/navbar.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='./css/footer.css') }}">
+</head>
+<body>
+
+  <nav class="site-nav">
+    <div>
+      <a href="/login"><img src="{{ url_for('static', filename='./img/esa-logo.png') }}" alt="ESA" class="header-logo"></a>
+    </div>
+  </nav>
+  <div class="container">
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+    {% for message in messages %}
+    {% if usuario %}
+    <div id="alerta" class="alert alert-success alert-dismissible fade show" role="alert">
+      <img src="{{ url_for('static', filename='./img/check.svg') }}" alt="Check"> {{ message }}
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    {% else %}
+    <div id="alerta" class="alert alert-danger alert-dismissible fade show" role="alert">
+      <img src="{{ url_for('static', filename='./img/erro.svg') }}" alt="Erro" class="m-2"> {{ message }}
+      <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+    </div>
+    {% endif %}
+    {% endfor %}
+    {% endif %}
+    {% endwith %}
+    <div class="row justify-content-center mt-5">
+      <div class="col-lg-4 col-md-6">
+        <div class="card">
+          <div class="card-body">
+            <form action="{{ url_for('autenticar') }}" method="post">
+              <input type="hidden" name="proxima" value="{{ proxima or url_for('mostra_estoque') or url_for('entrada_saida') }}">
+              {{ form.csrf_token() }}
+              <div class="mb-3 form-group">
+                {{ form.email.label(class="form-label") }}
+                {{ form.email(class="form-control") }}
+              </div>
+              <div class="mb-3 form-group">
+                {{ form.senha.label(class="form-label") }}
+                {{ form.senha(class="form-control") }}
+              </div>
+              <div class="text-center form-group">
+                {{ form.login(class="btn-login") }}
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <img src="{{ url_for('static', filename='./img/footer.png') }}" alt="ESA" class="footer-logo">
+  </footer>
+
+  <script src="../static/js/index.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" 
+  integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+</body>
+</html>

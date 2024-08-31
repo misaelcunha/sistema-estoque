@@ -1,0 +1,32 @@
+html, body{
+  height: 100%;
+}
+
+body{
+    display: flex;
+    flex-direction: column;
+}
+
+.footer{
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  margin-top: auto;
+  bottom: 0;
+  width: 100%;
+}
+
+@media (max-width: 768px) {
+  .footer-logo {
+    width: 80px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    margin-top: auto;
+    bottom: 0;
+    width: 100%;
+    background-color: #030E23;
+    padding: 1rem;
+    border-top: 3rem;
+  }
+}

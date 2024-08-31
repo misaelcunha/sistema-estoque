@@ -1,0 +1,104 @@
+/* Navbar CSS */
+.site-nav {
+  font-family: "Bebas Neue", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #030E23;
+  height: 6rem;
+  padding: 1rem;
+}
+
+@media (max-width: 768px) {
+  .site-nav {
+    flex-direction: column;
+    height: auto;
+  }
+
+  .menu-list {
+    flex-direction: column;
+    align-items: center;
+    margin: 0;
+  }
+
+  .menu-item {
+    margin: 0.5rem 0;
+  }
+
+  .header-img {
+    width: 100%;
+    margin-left: 0;
+  }
+}
+
+/* Estilos para a header-logo */
+.header-logo {
+  width: 60%;
+  height: 60%;
+  max-width: 120%;
+  max-height: 120%;
+  margin-left: 1rem;
+}
+
+/* Estilos para a lista de navegação */
+.menu-list {
+  display: flex;
+  list-style: none;
+  margin: 1rem;
+  padding: 0;
+}
+
+/* Estilos para os itens da lista */
+.menu-item {
+  margin-left: 0.5rem; /* Adiciona espaço entre os itens */
+  font-size: 1.4rem;
+}
+
+/* Estilos para os cards de menu */
+.menu-card {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: solid;
+  border-width: 0px;
+  width: 8rem;
+  height: 3rem;
+  margin: 2px;
+  background-color: #131D30;
+}
+
+/* Estilos para os links de navegação */
+.menu-item a {
+  color: #fff;
+  text-decoration: none;
+}
+
+.menu-card:hover {
+  background-color: #283040;
+}
+
+.menu-card:active {
+  background-color: #FF8C00;
+}
+
+#alerta {
+  position: fixed;
+  z-index: 10;
+  top: 90px;
+  right: 30px;
+}
+
+.header-img {
+  display: flex;
+  flex-direction: column;
+  margin-top: -0.05rem;
+  top: 0;
+  margin-left: 6.1rem;
+  width: 86%;
+}
+
+.active {
+  background-color: #FF8C00;
+}

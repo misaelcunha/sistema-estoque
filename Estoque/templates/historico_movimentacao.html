@@ -1,0 +1,53 @@
+{% extends "template_nav.html"%}
+{% block conteudo %}
+
+  <div class="container mt-4">
+    <div class="top-controls">
+      <form method="get" action="{{ url_for('mostra_estoque') }}">
+        <input id="search-field" type="text" name="search" placeholder="Buscar..." value="{{ request.args.get('search', '') }}">
+        <button type="submit" class="btn-lupa">
+          <img src="{{ url_for('static', filename='img/btn-lupa.png') }}" alt="Lupa" class="img-input">
+        </button>
+      </form>
+      <a href="{{ url_for('exportar_movimentacoes')}}"><button class="btn-control">Exportar Lista</button></a>
+    </div>
+
+    <div class="rounded">
+      <table class="table mt-4">
+        <thead class="text-center">
+          <tr>
+            <th scope="col">Id</th>
+            <th scope="col">Código Material</th>
+            <th scope="col">Quantidade</th>
+            <th scope="col">Ação</th>
+            <th scope="col">Descrição</th>
+            <th scope="col">Data/Hora</th>
+            <th scope="col">Feito Por</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for movimentacao in movimentacoes %}
+          <tr>
+            <td class="text-center">{{ movimentacao.id }}</td>
+            <td class="text-center">{{ movimentacao.material_codigo }}</td>
+            <td class="text-center">{{ movimentacao.quantidade }}</td>
+            <td class="text-center">{{ movimentacao.tipo }}</td>
+            <td>{{ movimentacao.descricao }}</td>
+            <td class="text-center">{{ movimentacao.data_hora }}</td>
+            <td class="text-center">{{ movimentacao.feito_por }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      <div class="pagination d-flex justify-content-center">
+        {{ pagination.links }}
+      </div>
+    </div>
+    <div class="bottom-controls">
+      <a href="{{ url_for('novo_material')}}"><button class="btn-control">Adicionar Material</button></a>
+      <a href="{{ url_for('mostra_estoque')}}"><button class="btn-control">Consultar Materiais</button></a>
+      <a href="{{ url_for('entrada_saida')}}"><button class="btn-control">Entrada e Saída</button></a>
+    </div>
+  </div>
+
+{% endblock %}

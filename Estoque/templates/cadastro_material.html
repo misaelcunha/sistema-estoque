@@ -1,0 +1,52 @@
+{% extends "template_form.html"%}
+{% block conteudo %}
+
+  <div class="d-flex justify-content-center">
+    <div class="container-form">
+        <h2 class="text-center">{{titulo}}</h2>
+        <form action="{{ url_for('criar_material') }}" method="post" enctype="multipart/form-data">
+            {{ form.csrf_token() }}
+          <div class="row mt-5">
+            <div class="col-md-6">
+              <div class="form-group">
+                {{form.unidade.label(class="form-label")}}
+                {{form.unidade(class="form-control")}}
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                {{form.quantidade.label(class="form-label")}}
+                {{form.quantidade(class="form-control")}}
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                {{form.descricao.label(class="form-label")}}
+                {{form.descricao(class="form-control")}}
+              </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                {{form.modelo.label(class="form-label")}}
+                {{form.modelo(class="form-control")}}
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+                {{form.fabricante.label(class="form-label")}}
+                {{form.fabricante(class="form-control")}}
+            </div>
+            <div class="form-group">
+                {{form.foto.label(class="form-label")}}
+                {{form.foto(class="form-control-file")}}
+            </div>
+          </div>
+          <div class="form-group d-flex justify-content-center text-center">
+            {{form.salvar(class="btn-control")}}
+          </div>
+        </form>
+    </div>
+  </div>
+
+{% endblock %}

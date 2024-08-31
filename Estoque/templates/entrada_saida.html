@@ -1,0 +1,124 @@
+{% extends "template_nav.html"%}
+{% block conteudo %}
+
+    {% with messages = get_flashed_messages() %}
+    {% if messages %}
+      {% for message in messages %}
+      <div id="alerta" class="alert alert-danger alert-dismissible fade show" role="alert">
+        <img src="{{ url_for('static', filename='./img/erro.svg') }}" alt="Erro" class="m-2"> {{ message }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+      {% endfor %}
+    {% endif %}
+    {% endwith %}
+
+  <div class="container mt-4">
+    <div class="top-controls">
+      <form method="get" action="{{ url_for('entrada_saida') }}">
+        <input id="search-field" type="text" name="search" placeholder="Buscar..." value="{{ request.args.get('search', '') }}">
+        <button type="submit" class="btn-lupa">
+          <img src="{{ url_for('static', filename='img/btn-lupa.png') }}" alt="Lupa" class="img-input">
+        </button>
+      </form>
+    </div>
+
+    <div class="rounded">
+      <table class="table mt-4">
+        <thead class="text-center">
+          <tr>
+            <th scope="col">Código</th>
+            <th scope="col">Unidade</th>
+            <th scope="col">Quantidade</th>
+            <th scope="col">Descrição</th>
+            <th scope="col">Modelo</th>
+            <th scope="col">Fabricante</th>
+            <th scope="col">Data/Hora</th>
+            <th scope="col">Ações</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for material in materiais %}
+          <tr class="{% if material.quantidade == 0 %} table-row-zero {% endif %}">
+            <td class="text-center">{{ material.codigo }}</td>
+            <td class="text-center">{{ material.unidade }}</td>
+            <td class="text-center">{{ material.quantidade }}</td>
+            <td>{{ material.descricao }}</td>
+            <td class="text-center">{{ material.modelo }}</td>
+            <td class="text-center">{{ material.fabricante }}</td>
+            <td class="text-center">{{ material.data_hora }}</td>
+            <td>
+              <!-- Botão para registrar entrada -->
+              <button type="button" class="mb-2 btn btn-success" data-bs-toggle="modal" data-bs-target="#entradaModal{{ material.codigo }}">
+                Entrada
+              </button>
+              <!-- Modal de entrada -->
+              <div class="modal fade" id="entradaModal{{ material.codigo }}" tabindex="-1" aria-labelledby="entradaModalLabel{{ material.codigo }}" aria-hidden="true">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="entradaModalLabel{{ material.codigo }}">Registrar Entrada</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <form action="{{ url_for('entrada_material', codigo=material.codigo) }}" method="post">
+                      {{ form.csrf_token() }}
+                      <div class="modal-body">
+                        <div class="mb-3">
+                          <label for="quantidadeEntrada{{ material.codigo }}" class="form-label">Quantidade</label>
+                          <input type="number" class="form-control" id="quantidadeEntrada{{ material.codigo }}" name="quantidade" required>
+                        </div>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                        <button type="submit" class="btn btn-primary">Registrar</button>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </td>
+            <td>
+              <!-- Botão para registrar saída -->
+              <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#saidaModal{{ material.codigo }}">
+                Saída
+              </button>
+              <!-- Modal de saída -->
+              <div class="modal fade" id="saidaModal{{ material.codigo }}" tabindex="-1" aria-labelledby="saidaModalLabel{{ material.codigo }}" aria-hidden="true">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="saidaModalLabel{{ material.codigo }}">Registrar Saída</h5>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <form action="{{ url_for('saida_material', codigo=material.codigo) }}" method="post">
+                      {{ form.csrf_token() }}
+                      <div class="modal-body">
+                        <div class="mb-3">
+                          <label for="quantidadeSaida{{ material.codigo }}" class="form-label">Quantidade</label>
+                          <input type="number" class="form-control" id="quantidadeSaida{{ material.codigo }}" name="quantidade" required>
+                        </div>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+                        <button type="submit" class="btn btn-primary">Registrar</button>
+                      </div>
+                    </form>
+                  </div>
+                </div>
+              </div>
+            </td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+      <div class="pagination d-flex justify-content-center">
+        {{ pagination.links }}
+      </div>
+    </div>
+    <div class="bottom-controls">
+      <a href="{{ url_for('novo_material')}}"><button class="btn-control">Adicionar Material</button></a>
+      <a href="{{ url_for('mostra_estoque')}}"><button class="btn-control">Consultar Materiais</button></a>
+      <a href="{{ url_for('mostra_historico')}}"><button class="btn-control">Histórico</button></a>
+    </div>
+  </div>
+
+{% endblock %}

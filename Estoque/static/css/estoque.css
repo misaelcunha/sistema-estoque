@@ -1,0 +1,124 @@
+body{
+    background-color: #F5FFFA;
+}
+
+.container{
+    background-color: #FFFF;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-left: solid 20px #131D30;
+    border-right: solid 20px #131D30;
+    margin-bottom: 1.5rem;
+}
+
+.top-controls{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #131D30;
+  height: 6rem;
+  margin-left: -.8rem;
+  margin-right: -.8rem;
+  margin-bottom: 1rem;
+}
+
+.bottom-controls{
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  background-color: #131D30;
+  height: 8rem;
+  margin-left: -.8rem;
+  margin-right: -.8rem;
+}
+
+#search-field{
+  border:solid 1px;
+  border-radius:1rem;
+  width:700px;
+  height: 36px;
+  padding: .625rem;
+}
+
+.table-row-zero td{
+  color: #ff0000;
+}
+
+.rounded{
+  border-radius: 2rem;
+  border: white solid 15px;
+  margin-top: -1rem;
+  margin-left: -1rem;
+  margin-right: -1rem;
+  overflow: hidden;
+}
+
+.img-input{
+  width: 2.3rem;
+  height: 2.3rem;
+}
+
+input, input:focus{
+  border: 0;
+  outline: 0;
+}
+
+.btn-lupa{
+  border: none;
+  background: none;
+  cursor: pointer;
+  margin: 0;
+  padding: 0;
+}
+
+.btn-control{
+  font-family: "Bebas Neue", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  font-size: 22px;
+  border: none;
+  background-color: #FA9B1E;
+  color: white;
+  width: 200px;
+  height: 60px;
+  border-radius: 2rem;
+}
+
+.btn-control:hover{
+  background-color: #FFA836;
+}
+
+.btn-control:active{
+  background-color: #DB7107;
+}
+
+.container-historic, .container-information {
+  background-color: #FFFF;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  border: solid 20px #131D30;
+  margin: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.container-information {
+  font-family: "Bebas Neue", sans-serif;
+  font-weight: 400;
+  font-style: normal;
+  width: 300px;
+  height: 400px;
+  margin: 1rem;
+  background-color: #131D30;
+  color: white;
+  border-radius: 1.8rem;
+}
+
+.item-information{
+  font-size: 24px;
+  border: none;
+  background-color: white;
+  color: black;
+  width: 240px;
+  height: 36px;
+  border-radius: 1rem;
+  margin-left: .7rem;
+  margin-bottom: .625rem;
+}
